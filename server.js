@@ -22,7 +22,7 @@ const mediasoup = require("mediasoup");
 const config = require("./config");
 const createWorkers = require("./createWorkers");
 const { ListenInfo } = require("mediasoup/node/lib/fbs/transport/listen-info");
-const createWebRtcTransportBothKinds = require("./createWebRtcTransportBothKinds");
+const createWebRtcTransportBothKinds = require("./public/createWebRtcTransportBothKinds");
 
 // setup the socketio server, listening by way of our express http
 const io = socketio(httpsServer, {

@@ -10,7 +10,7 @@ let consumer = null;
 // connect to the server
 const initConnect = () => {
   // console.log("init connect")
-  socket = io("https://localhost:3030");
+  socket = io("https://192.168.248.57:3030");
   connectButton.innerHTML = "Connecting...";
   connectButton.disabled = true;
 
