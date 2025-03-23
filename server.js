@@ -19,7 +19,7 @@ const httpsServer = https.createServer(options, app);
 const socketio = require("socket.io");
 const mediasoup = require("mediasoup");
 
-const config = require("./config/config");
+const config = require("./config");
 const createWorkers = require("./createWorkers");
 const { ListenInfo } = require("mediasoup/node/lib/fbs/transport/listen-info");
 const createWebRtcTransportBothKinds = require("./createWebRtcTransportBothKinds");
@@ -90,7 +90,7 @@ io.on("connect", (socket) => {
       thisClientProducer.on("transportclose", () => {
         console.log("Producer transport closed. Just telling");
         thisClientProducer.close();
-      })
+      });
 
       theProducer = thisClientProducer;
 
@@ -149,7 +149,7 @@ io.on("connect", (socket) => {
         thisClientConsumer.on("transportclose", () => {
           console.log("consumer transport closed. Just telling");
           thisClientConsumer.close();
-        })
+        });
 
         console.log(thisClientConsumer);
         const consumerParams = {
@@ -176,11 +176,11 @@ io.on("connect", (socket) => {
     try {
       thisClientConsumerTransport?.close();
       thisClientProducerTransport?.close();
-      ack("closed")
+      ack("closed");
     } catch (error) {
-      ack("closeError")
+      ack("closeError");
     }
-  })
+  });
 });
 
 httpsServer.listen(config.port, () => {

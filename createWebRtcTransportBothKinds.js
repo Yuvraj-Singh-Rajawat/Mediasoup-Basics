@@ -6,13 +6,13 @@ const createWebRtcTransportBothKinds = (router) => new Promise(async(resolve, re
     listenInfos: [
       {
         protocol: "udp",
-        ip: "0.0.0.0",
-        announcedAddress: "localhost",
+        ip: "127.0.0.1",
+        // announcedAddress: "localhost",
       },
       {
         protocol: "tcp",
-        ip: "0.0.0.0",
-        announcedAddress: "localhost",
+        ip: "127.0.0.1",
+        // announcedAddress: "localhost",
       },
     ],
   });
