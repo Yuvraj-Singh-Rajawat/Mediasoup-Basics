@@ -161,34 +161,33 @@ const createConsumer = async () => {
 };
 
 const consume = async () => {
-
-  console.log("coming line 163")
+  console.log("coming line 163");
   // emit consume-media event. This will get us back the stuff that we need to make ac consumer, and get the video client
-  const consumerParams = await socket.emitWithAck("consume-media", {rtpCapabilities: device.rtpCapabilities})
-  console.log("coming line 166")
+  const consumerParams = await socket.emitWithAck("consume-media", {
+    rtpCapabilities: device.rtpCapabilities,
+  });
+  console.log("coming line 166");
 
-  console.log(consumerParams)
-  if(consumerParams === "noProducer"){
-    console.log("There is no producer set up to consume")
-  }
-  else if(consumerParams === "cannotConsume"){
+  console.log(consumerParams);
+  if (consumerParams === "noProducer") {
+    console.log("There is no producer set up to consume");
+  } else if (consumerParams === "cannotConsume") {
     console.log("rtpCapabilities failed. Cannot consume");
-  }
-  else{
+  } else {
     // set up the consumer! and add the video to the video tag
-    
-    consumer = await consumerTransport.consume(consumerParams)
-    const {track} = consumer;
-    console.log(track)
+
+    consumer = await consumerTransport.consume(consumerParams);
+    const { track } = consumer;
+    console.log(track);
 
     // refer to mdn to know more about mediastream
     remoteVideo.srcObject = new MediaStream([track]);
 
-    console.log("Track is ready .. we need to unpause")
-    await socket.emitWithAck('unpauseConsumer');
+    console.log("Track is ready .. we need to unpause");
+    await socket.emitWithAck("unpauseConsumer");
 
-    consumeButton.disabled = true
-    disconnectButton.disabled = false
+    consumeButton.disabled = true;
+    disconnectButton.disabled = false;
   }
 };
 
@@ -198,16 +197,16 @@ const disconnect = async () => {
   // send the message to the server, then close here
   const closeResp = await socket.emitWithAck("close-all");
 
-  if(closeResp === "closeError"){
-    console.log("Something happened on the Server...")
+  if (closeResp === "closeError") {
+    console.log("Something happened on the Server...");
   }
   // it doesn't matter if the server didn't close, we are closing.
   // now
-  producerTransport?.close()
-  consumerTransport?.close()
+  producerTransport?.close();
+  consumerTransport?.close();
 
-  connectButton.disabled = false
-}
+  connectButton.disabled = false;
+};
 
 // socket listeners here!
 function addSocketListeners() {
