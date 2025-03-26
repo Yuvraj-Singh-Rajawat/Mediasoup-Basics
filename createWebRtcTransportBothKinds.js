@@ -7,12 +7,12 @@ const createWebRtcTransportBothKinds = (router) =>
       listenInfos: [
         {
           protocol: "udp",
-          ip: "127.0.0.1",
+          ip: "0.0.0.0",
           announcedAddress: "192.168.248.57",
         },
         {
           protocol: "tcp",
-          ip: "127.0.0.1",
+          ip: "0.0.0.0",
           announcedAddress: "192.168.248.57",
         },
       ],
